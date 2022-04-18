@@ -1,3 +1,4 @@
+import 'package:blog/loginPageDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -44,14 +45,26 @@ class topinfoBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       SizedBox(
-                        width: 70,
-                        height: 30,
-                        child: Text(
-                          'Login',
-                          style: TextStyle(color: Colors.white),
-                          textAlign: TextAlign.right,
-                        ),
-                      ),
+                          width: 70,
+                          height: 30,
+                          child: SizedBox(
+                            width: 70,
+                            height: 30,
+                            child: TextButton(
+                              child: Text(
+                                'Login',
+                                style: TextStyle(color: Colors.white),
+                                textAlign: TextAlign.right,
+                              ),
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return loginPageDialog();
+                                    });
+                              },
+                            ),
+                          )),
                       SizedBox(
                         width: 70,
                         height: 30,

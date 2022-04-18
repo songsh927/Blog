@@ -77,7 +77,6 @@ class _bottomArticlePageState extends State<bottomArticlePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     articles.add(data[0]);
   }
 
@@ -91,6 +90,9 @@ class _bottomArticlePageState extends State<bottomArticlePage> {
           color: Colors.black.withOpacity(0.12),
         ),
         child: Row(children: <Widget>[
+          ////////////////////
+          /// Side Menu Bar///
+          ////////////////////
           Flexible(
               flex: 1,
               child: ListView.builder(
@@ -121,6 +123,9 @@ class _bottomArticlePageState extends State<bottomArticlePage> {
                       ],
                     );
                   })),
+          ////////////////////////
+          /// Main Article Page///
+          ////////////////////////
           Flexible(
               flex: 9,
               fit: FlexFit.tight,
@@ -155,7 +160,7 @@ class _bottomArticlePageState extends State<bottomArticlePage> {
                                   articles[0][i]['title'],
                                   style: TextStyle(fontSize: 30),
                                 ),
-                                //Text(articles[0][i]['text']),
+                                //미리보기 텍스트
                               ],
                             ),
                             style: ButtonStyle(
