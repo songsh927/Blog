@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:blog/article_page.dart';
+import 'package:blog/new_article.dart';
 import 'package:flutter/material.dart';
 
 class bottomArticlePage extends StatefulWidget {
@@ -82,95 +83,106 @@ class _bottomArticlePageState extends State<bottomArticlePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-          backgroundBlendMode: BlendMode.dstATop,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-          color: Colors.black.withOpacity(0.12),
+    return Scaffold(
+        backgroundColor: Colors.black,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => newArticlePage(data: data)));
+          },
         ),
-        child: Row(children: <Widget>[
-          ////////////////////
-          /// Side Menu Bar///
-          ////////////////////
-          Flexible(
-              flex: 1,
-              child: ListView.builder(
-                  itemCount: menus.length,
-                  controller: scroll,
-                  itemBuilder: (c, i) {
-                    return Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(5),
-                          margin: EdgeInsets.all(5),
-                          height: 40,
-                          width: 130,
-                          child: OutlinedButton(
-                            onPressed: () {
-                              setState(() {
-                                articles.clear();
-                                articles.add(data[i]);
-                              });
-                            },
-                            child: Text(
-                              menus[i],
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.black),
-                            ),
-                          ),
-                        )
-                      ],
-                    );
-                  })),
-          ////////////////////////
-          /// Main Article Page///
-          ////////////////////////
-          Flexible(
-              flex: 9,
-              fit: FlexFit.tight,
-              child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(left: BorderSide(color: Colors.black)),
-                  ),
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4),
-                    itemBuilder: (c, i) {
-                      return Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.blueGrey),
-                          padding: EdgeInsets.all(10),
-                          margin: EdgeInsets.all(10),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              var data = articles[0][i];
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) =>
-                                          articlePage(data: data))));
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(
-                                  articles[0][i]['title'],
-                                  style: TextStyle(fontSize: 30),
+        body: Container(
+            decoration: BoxDecoration(
+              backgroundBlendMode: BlendMode.dstATop,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+              color: Colors.black.withOpacity(0.12),
+            ),
+            child: Row(children: <Widget>[
+              ////////////////////
+              /// Side Menu Bar///
+              ////////////////////
+              Flexible(
+                  flex: 1,
+                  child: ListView.builder(
+                      itemCount: menus.length,
+                      controller: scroll,
+                      itemBuilder: (c, i) {
+                        return Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              margin: EdgeInsets.all(5),
+                              height: 40,
+                              width: 130,
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    articles.clear();
+                                    articles.add(data[i]);
+                                  });
+                                },
+                                child: Text(
+                                  menus[i],
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.black),
                                 ),
-                                //미리보기 텍스트
-                              ],
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.blueGrey),
-                            ),
-                          ));
-                    },
-                    itemCount: articles[0].length,
-                  )))
-        ]));
+                              ),
+                            )
+                          ],
+                        );
+                      })),
+              ////////////////////////
+              /// Main Article Page///
+              ////////////////////////
+              Flexible(
+                  flex: 9,
+                  fit: FlexFit.tight,
+                  child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(left: BorderSide(color: Colors.black)),
+                      ),
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 4),
+                        itemBuilder: (c, i) {
+                          return Container(
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  color: Colors.blueGrey),
+                              padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.all(10),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  var data = articles[0][i];
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) =>
+                                              articlePage(data: data))));
+                                },
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      articles[0][i]['title'],
+                                      style: TextStyle(fontSize: 30),
+                                    ),
+                                    //미리보기 텍스트
+                                  ],
+                                ),
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Colors.blueGrey),
+                                ),
+                              ));
+                        },
+                        itemCount: articles[0].length,
+                      )))
+            ])));
   }
 }
